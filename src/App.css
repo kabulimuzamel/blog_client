@@ -1,0 +1,22 @@
+
+body {
+    background: url(./Images/loading.avif);
+}
+
+.footer {
+    height: 10rem;
+    background-color:rgb(33, 37, 42)
+}
+
+.navBar {
+    height: 5rem;
+}
+
+.homePageMain {
+    border: 15px solid rgb(255, 255, 255);
+    height: 50vh;
+    width: 50vw;
+    margin-top: 12rem;
+    margin-left: 40rem;
+    padding: 65px;
+}
