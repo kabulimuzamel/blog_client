@@ -4,6 +4,7 @@ import { UserHeader } from "../bodyComponent/UserHeader";
 import { Navigate } from "react-router-dom";
 import { backgroundUrlStyle } from '../Style/backgroundUrlStyle';
 import { updateInfoHandler, deleteInfoHandler } from "../Functions/apiCallFunctions";
+import { myAccountInfo } from "../Functions/apiCallFunctions";
 const { toShowIconUrl, toHideIconUrl, passwordIconStyle, showPassIconHandler } = require('../Style/passwordHandler');
 
 const imgUrl = require('../Images/creating.avif')
@@ -26,14 +27,7 @@ export function MyAccount() {
             setToken(localStorage.getItem('token'));
         }
         if(token) {
-            fetch(`http://localhost:3000/api/user/${token}`)
-                .then(res => res.json())
-                .then(res => {
-                    setName(res.name);
-                    setUserName(res.userName)
-                    setPassword(res.password);
-                })
-                .catch(err => console.log(err));
+            myAccountInfo(setName, setUserName, setPassword, token);
         }
     }, [token]);
 

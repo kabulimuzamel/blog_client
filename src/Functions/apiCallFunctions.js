@@ -22,7 +22,7 @@ export const loginHandler = (e, userName, password, setIsLoggedIn, setAlertMessa
 }
 
 export const allPostFetcher = (setPostsArr, token) => {
-    fetch(`${apiUrl} /api/blog${token ? `/${token}` : '/'}`)
+    fetch(`${apiUrl}/api/blog${token ? `/${token}` : '/'}`)
         .then((res) => res.json())
         .then((res) => {
             setPostsArr(res)
@@ -37,7 +37,7 @@ export const submitPostHandler = (e, title, content, setAlertMessageVariant, set
         setAlertMessage('Please fill out the author, title, and content of the post you want to share');
     } else {
         e.preventDefault()
-        fetch(`${apiUrl} /api/blog/${token}`, {
+        fetch(`${apiUrl}/api/blog/${token}`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -80,7 +80,7 @@ export const closeModal = (setIsModalVisible, setAlertMessage) => {
 
 export const deleteAPostHandler = (e, setAlertMessage, token, id) => {
     e.preventDefault()
-    fetch(`${apiUrl} /api/blog/${token}/${id}`, {
+    fetch(`${apiUrl}/api/blog/${token}/${id}`, {
         method: 'DELETE',
     })
         .then((res) => {
@@ -103,7 +103,7 @@ export const updatePostHandler = (e, title, content, setAlertMessage, token, id)
         setAlertMessage('You can not leave title and content empty')
         return
     }
-    fetch(`${apiUrl} /api/blog/${token}/${id}`, {
+    fetch(`${apiUrl}/api/blog/${token}/${id}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
@@ -150,7 +150,7 @@ export const updateInfoHandler = (e, name, userName, password, setAlertMessageVa
 		return
 	}
 
-	fetch(`${apiUrl} /api/user/${token}`, {
+	fetch(`${apiUrl}/api/user/${token}`, {
 		method: 'PUT',
 		headers: {
 			Accept: 'application/json',
@@ -175,7 +175,7 @@ export const updateInfoHandler = (e, name, userName, password, setAlertMessageVa
 
 export const deleteInfoHandler = (e, token, setAlertMessageVariant, setAlertMessage, setIsDeleted) => {
 	e.preventDefault()
-	fetch(`${apiUrl} /api/user/${token}`, {
+	fetch(`${apiUrl}/api/user/${token}`, {
 		method: 'DELETE',
 	}).then((res) => {
 		if (res.status === 200) {
@@ -193,7 +193,7 @@ export const deleteInfoHandler = (e, token, setAlertMessageVariant, setAlertMess
 export const userIdentifier = (setToken) => {
     setTimeout(() => {        
         if(localStorage.getItem('token')) {
-            fetch(`${apiUrl} /api/user/${localStorage.getItem('token')}`)
+            fetch(`${apiUrl}/api/user/${localStorage.getItem('token')}`)
                 .then(res => {
                     if(res.status === 200) {
                         setToken(localStorage.getItem('token'));
@@ -205,4 +205,15 @@ export const userIdentifier = (setToken) => {
             setToken(false)
         }   
     }, 1000);
+}
+
+export const myAccountInfo = (setName, setUserName, setPassword, token) => {
+    fetch(`${apiUrl}/api/user/${token}`)
+        .then(res => res.json())
+        .then(res => {
+            setName(res.name);
+            setUserName(res.userName)
+            setPassword(res.password);
+        })
+        .catch(err => console.log(err));
 }

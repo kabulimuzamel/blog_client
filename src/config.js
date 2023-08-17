@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
 	production: 'https://blog-client-zlq9.onrender.com',
-	development: 'http://localhost:3000',
+	development: 'http://localhost:8080',
 }
 
 if (window.location.hostname === 'localhost') {
