@@ -1,6 +1,6 @@
 let apiUrl
 const apiUrls = {
-	production: 'https://blog-client-zlq9.onrender.com',
+	production: 'https://blog-server-w44u.onrender.com',
 	development: 'http://localhost:8080',
 }
 
