@@ -1,7 +1,8 @@
 import apiUrl from "../config";
 
-export const loginHandler = (e, userName, password, setIsLoggedIn, setAlertMessage) => {
+export const loginHandler = (e, userName, password, setIsLoggedIn, setAlertMessage, setIsPending) => {
     e.preventDefault();
+    setIsPending(true);
     fetch(apiUrl + '/api/login', {
         method: 'POST',
         headers: {
@@ -11,6 +12,7 @@ export const loginHandler = (e, userName, password, setIsLoggedIn, setAlertMessa
         body: JSON.stringify({ userName, password })
     }).then(res => {   
         if(res.status === 200) {
+            setIsPending(false);
             setIsLoggedIn(true);
             res.json().then((res) => {
                 localStorage.setItem('token', res.token)

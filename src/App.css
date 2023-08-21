@@ -20,3 +20,7 @@ body {
     margin-left: 40rem;
     padding: 65px;
 }
+
+.modalColor {
+    background-color: rgb(45, 45, 45);
+}

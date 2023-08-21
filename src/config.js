@@ -1,4 +1,4 @@
-let apiUrl
+let apiUrl;
 const apiUrls = {
 	production: 'https://blog-server-w44u.onrender.com',
 	development: 'http://localhost:8080',

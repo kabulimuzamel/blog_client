@@ -38,16 +38,16 @@ export function MyAccount() {
     return (
         <>
             <BodyBackground />
-            <Modal show={show}>
-                <Modal.Header>
+            <Modal show={show} className="text-light" centered>
+                <Modal.Header className="bg-dark">
                     <CloseButton onClick={() => setShow(false)} />
                 </Modal.Header>
-                <Modal.Body>
-                    <Modal.Title>
+                <Modal.Body className="bg-dark">
+                    <Modal.Title >
                         Are you sure you wanna delete you account?
                     </Modal.Title>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="bg-dark">
                     <Button
                         className='btn-sm'
                         variant='primary'

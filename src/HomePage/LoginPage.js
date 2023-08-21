@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { loginHandler } from "../Functions/apiCallFunctions";
-import { Container, Alert, Form, FormGroup, CloseButton, Button, Image } from "react-bootstrap";
+import { Container, Alert, Form, FormGroup, CloseButton, Button, Image, Spinner } from "react-bootstrap";
 import { Header } from "./Header";
 import { Navigate } from "react-router-dom";
 import { backgroundUrlStyle } from "../Style/backgroundUrlStyle";
@@ -16,7 +16,23 @@ export function LoginPage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [toShowPassword, setToShowPassword] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [isPending, setIsPending] = useState(false);
 
+    const spinnerStyle = {
+        position: 'absolute',
+        top: '20rem',
+        right: '43rem',
+        height: '3rem',
+        width: '3rem'
+    }
+
+    if(isPending) {
+        return  (
+            <div>
+                <Spinner style={spinnerStyle} animation="border" variant="light" />
+            </div>
+        )
+    }
     if(isLoggedIn) {
         return <Navigate to='/UserPage'/>
     } else {
@@ -73,7 +89,8 @@ export function LoginPage() {
                                     userName,
                                     password,
                                     setIsLoggedIn,
-                                    setAlertMessage
+                                    setAlertMessage,
+                                    setIsPending
                                 )
                             }>
                             Log In

@@ -15,34 +15,37 @@ export const UpdatePost = ({ token, postObj }) => {
 				<Button
 					className='text-white'
 					variant='link'
-					onClick={(event) => handleButtonClick(
-						event,
-						setIsModalVisible, 
-						setTitle, 
-						setContent, 
-						setId, 
-						postObj
-					)}>
+					onClick={(event) =>
+						handleButtonClick(
+							event,
+							setIsModalVisible,
+							setTitle,
+							setContent,
+							setId,
+							postObj
+						)
+					}>
 					Edit
 				</Button>
 
-				<Modal show={isModalVisible} onHide={() => closeModal(
-					setIsModalVisible, 
-					setAlertMessage
-				)} centered>
-				
-					<Modal.Header closeButton>
+				<Modal
+					show={isModalVisible}
+					onHide={() => closeModal(setIsModalVisible, setAlertMessage)}
+					className='text-light'
+					centered>
+					<Modal.Header closeButton className='bg-dark'>
 						<Modal.Title
 							className='text-success'
 							onClick={() => setAlertMessage(null)}>
 							{alertMessage}
 						</Modal.Title>
 					</Modal.Header>
-					<Modal.Body>
+					<Modal.Body className='bg-dark'>
 						<Form>
 							<Form.Group>
 								<Form.Label>Title</Form.Label>
 								<Form.Control
+									className='text-bg-dark'
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 								/>
@@ -50,6 +53,7 @@ export const UpdatePost = ({ token, postObj }) => {
 							<Form.Group>
 								<Form.Label>Content</Form.Label>
 								<Form.Control
+									className='text-bg-dark'
 									as='textarea'
 									value={content}
 									onChange={(e) => setContent(e.target.value)}
@@ -64,23 +68,26 @@ export const UpdatePost = ({ token, postObj }) => {
 							</Form.Group>
 						</Form>
 					</Modal.Body>
-					<Modal.Footer>
-						<Button variant='danger' onClick={(event) => deleteAPostHandler(
-							event, 
-							setAlertMessage, 
-							token, 
-							id
-						)}>
+					<Modal.Footer className='bg-dark'>
+						<Button
+							variant='danger'
+							onClick={(event) =>
+								deleteAPostHandler(event, setAlertMessage, token, id)
+							}>
 							Delete
 						</Button>
-						<Button variant='primary' onClick={(event) => updatePostHandler(
-							event, 
-							title, 
-							content, 
-							setAlertMessage, 
-							token, 
-							id
-						)}>
+						<Button
+							variant='primary'
+							onClick={(event) =>
+								updatePostHandler(
+									event,
+									title,
+									content,
+									setAlertMessage,
+									token,
+									id
+								)
+							}>
 							Save changes
 						</Button>
 					</Modal.Footer>
