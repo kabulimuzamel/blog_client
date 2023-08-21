@@ -119,8 +119,9 @@ export const updatePostHandler = (e, title, content, setAlertMessage, token, id)
         .catch((err) => console.log(err))
 }
 
-export const submitFormAccount = (e, name, userName, password, setIsAccountCreated, setAlertMessage) => {
+export const submitFormAccount = (e, name, userName, password, setIsAccountCreated, setAlertMessage, setIsPending) => {
 	e.preventDefault();
+    setIsPending(true)
 	fetch(apiUrl + '/api/user', {
 		method: 'POST',
 		headers: {
@@ -133,10 +134,12 @@ export const submitFormAccount = (e, name, userName, password, setIsAccountCreat
 			if (res.status === 200) {
 				res.json().then((data) => {
 					localStorage.setItem('token', data.token)
+                    setIsPending(false)
 					setIsAccountCreated(true)
 				})
 			} else {
 				res.json().then((data) => {
+                    setIsPending(false)
 					setAlertMessage(data.error)
 				})
 			}

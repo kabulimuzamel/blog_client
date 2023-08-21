@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Form, FormGroup, Alert, CloseButton, Image } from "react-bootstrap";
+import { Spinner, Button, Container, Form, FormGroup, Alert, CloseButton, Image } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import { submitFormAccount } from "../Functions/apiCallFunctions";
 const { toShowIconUrl, toHideIconUrl, passwordIconStyle, showPassIconHandler } = require('../Style/passwordHandler');
@@ -12,7 +12,23 @@ export function CreateUser() {
     const [alertMessage, setAlertMessage] = useState(null);
     const [toShowPassword, setToShowPassword] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [isPending, setIsPending] = useState(false);
 
+   const spinnerStyle = {
+        position: 'absolute',
+        top: '20rem',
+        right: '43rem',
+        height: '3rem',
+        width: '3rem'
+    }
+
+    if(isPending) {
+        return  (
+            <div>
+                <Spinner style={spinnerStyle} animation="border" variant="light" />
+            </div>
+        )
+    }
     if(isAccountCreated) {
         return <Navigate to='/UserPage' />
     }
@@ -76,7 +92,8 @@ export function CreateUser() {
                             userName,
                             password,
                             setIsAccountCreated,
-                            setAlertMessage
+                            setAlertMessage,
+                            setIsPending
                         )
                     }>
                     Register
